@@ -1,7 +1,7 @@
 import express from "express";
 import os from "os";
 import si from "systeminformation";
-import catchAsync from "@/utlis/catchAsync";
+import catchAsync from ''
 
 const router = express.Router();
 
@@ -63,4 +63,4 @@ router.get(
   })
 );
 
-export default router;
+export default router; 

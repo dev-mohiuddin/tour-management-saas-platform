@@ -4,8 +4,10 @@
   "description": "Enterprise-level tour management backend using Node.js, Express, Socket.IO",
   "main": "app.js",
   "type": "module",
-  "_moduleAliases": {
-    "@": "src"
+  "exports": {
+    "@/routes/*": "./src/routes/*",
+    "@/middlewares/*": "./src/middlewares/*",
+    "@/utils/*": "./src/utils/*"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -29,13 +31,13 @@
     "ioredis": "^5.8.0",
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
-    "module-alias": "^2.2.3",
     "moment": "^2.30.1",
     "mongoose": "^8.19.0",
     "morgan": "^1.10.1",
     "node-cron": "^4.2.1",
     "nodemon": "^3.1.10",
     "socket.io": "^4.8.1",
+    "systeminformation": "^5.27.10",
     "uuid": "^13.0.0",
     "validator": "^13.15.15",
     "winston": "^3.18.3",

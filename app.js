@@ -1,10 +1,11 @@
 import dotenv from "dotenv";
 import express from "express";
-import { server, app } from "./src/socket/server.js"
+import { server, app } from "./src/socket/server.js";
 import { globalResponse, attachRequestId } from "./src/utlis/response.utll.js";
 import globalErrorHandler from "./src/middlewares/globalErrorHandler.middleware.js";
 import securityMiddleware from "./src/middlewares/security.middleware.js";
 import notFoundHandler from "./src/middlewares/notFoundHandler.middleware.js";
+import healthRouter from "./src/routes/v1/helth.route/helth.route.js";
 import { connectDatabase } from "./src/config/dbConncet.js";
 
 dotenv.config();
@@ -17,6 +18,9 @@ app.use(securityMiddleware);
 
 // global response formatter
 app.use(globalResponse);
+
+// health route
+app.use("/api/health", healthRouter);
 
 // not found handler
 app.use(notFoundHandler);
