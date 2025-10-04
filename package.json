@@ -4,10 +4,10 @@
   "description": "Enterprise-level tour management backend using Node.js, Express, Socket.IO",
   "main": "app.js",
   "type": "module",
-  "exports": {
-    "@/routes/*": "./src/routes/*",
-    "@/middlewares/*": "./src/middlewares/*",
-    "@/utils/*": "./src/utils/*"
+  "imports": {
+    "#utils/*": "./src/utils/*",
+    "#routes/*": "./src/routes/*",
+    "#controllers/*": "./src/controllers/*"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

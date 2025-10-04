@@ -1,3 +1,4 @@
+
 import dotenv from "dotenv";
 import express from "express";
 import { server, app } from "./src/socket/server.js";
@@ -10,7 +11,6 @@ import { connectDatabase } from "./src/config/dbConncet.js";
 
 dotenv.config();
 const PORT = process.env.PORT || 8000;
-const MONGO_URI = process.env.MONGO_URI;
 
 app.use(express.json());
 app.use(attachRequestId);
