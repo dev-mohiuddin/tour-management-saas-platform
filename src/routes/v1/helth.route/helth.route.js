@@ -1,7 +1,7 @@
 import express from "express";
 import os from "os";
 import si from "systeminformation";
-import catchAsync from '../../../utlis/catchAsync.js'
+import catchAsync from '#utils/catchAsync.js'
 
 const router = express.Router();
 

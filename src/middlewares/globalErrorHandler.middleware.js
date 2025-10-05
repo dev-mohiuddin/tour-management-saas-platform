@@ -1,4 +1,4 @@
-// globalErrorHandler.js
+// src/middlewares/globalErrorHandler.middleware.js
 import { ZodError } from "zod";
 
 const globalErrorHandler = (err, req, res, next) => {
@@ -15,13 +15,17 @@ const globalErrorHandler = (err, req, res, next) => {
     }));
   }
 
-  const trace = err;
 
-  return res.error({
+  const trace =
+    process.env.NODE_ENV === "development" ? err.stack || err : undefined;
+
+  return res.status(statusCode).json({
+    success: false,
     message,
     statusCode,
     data,
     trace,
   });
 };
+
 export default globalErrorHandler;

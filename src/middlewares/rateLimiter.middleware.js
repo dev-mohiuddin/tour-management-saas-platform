@@ -1,5 +1,5 @@
 import rateLimit from "express-rate-limit";
-import { globalResponse } from "@/utlis/response.utll";
+import { globalResponse } from "#utils/response.utll.js";
 
 /**
  * Generate a rate limiter with custom handler
