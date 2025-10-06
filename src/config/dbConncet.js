@@ -1,6 +1,7 @@
 // src/config/dbConnect.js
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import { initData } from "./initDataSetup/index.js";
 
 dotenv.config();
 
@@ -9,17 +10,18 @@ export const connectDatabase = async () => {
   if (!MONGO_URI) throw new Error("MONGO_URI not defined in .env");
 
   const isProd = process.env.NODE_ENV === "production";
-  const maxRetries = 5; 
-  const retryDelay = 1000; 
+  const maxRetries = 5;
+  const retryDelay = 1000;
 
   const connect = async (attempt = 1) => {
     try {
       await mongoose.connect(MONGO_URI, {
         serverSelectionTimeoutMS: 5000,
         ssl: isProd,
-        tlsAllowInvalidCertificates: !isProd, 
+        tlsAllowInvalidCertificates: !isProd,
       });
-      console.log("✅ MongoDB connected!");
+      await initData();
+      console.log("MongoDB connected!");
     } catch (err) {
       console.error(
         `MongoDB connection failed (attempt ${attempt}):`,
@@ -39,12 +41,12 @@ export const connectDatabase = async () => {
 
   // Connection event listeners
   mongoose.connection.on("disconnected", () =>
-    console.warn("⚠️ MongoDB disconnected")
+    console.warn("MongoDB disconnected")
   );
   mongoose.connection.on("reconnected", () =>
-    console.log("🔄 MongoDB reconnected")
+    console.log("MongoDB reconnected")
   );
   mongoose.connection.on("error", (err) =>
-    console.error("❌ MongoDB connection error:", err.message)
+    console.error(" MongoDB connection error:", err.message)
   );
 };

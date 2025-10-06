@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
+import path from "path";
 
 export const attachRequestId = (req, res, next) => {
   if (!req.requestId) req.requestId = uuidv4();
@@ -41,13 +42,25 @@ export const globalResponse = (req, res, next) => {
     let errorTrace = null;
 
     if (trace instanceof Error) {
-      errorTrace = {
-        name: trace.name,
-        message: trace.message,
-        ...(process.env.NODE_ENV !== "production"
-          ? { stack: trace.stack }
-          : {}),
-      };
+      if (process.env.NODE_ENV !== "production" && trace.stack) {
+        const stackLines = trace.stack.split("\n").slice(1);
+        errorTrace = stackLines.map((line) => {
+          const match = line.match(/\((.*):(\d+):(\d+)\)/);
+          if (match) {
+            const [_, filePath, lineNum, colNum] = match;
+            return {
+              file: path.relative(process.cwd(), filePath),
+              line: parseInt(lineNum, 10),
+              column: parseInt(colNum, 10),
+              description: `${trace.name}: ${trace.message}`,
+            };
+          }
+          return { raw: line.trim(), description: `${trace.name}: ${trace.message}` };
+        });
+      } else {
+    
+        errorTrace = { name: trace.name, message: trace.message };
+      }
     } else if (trace && typeof trace === "object") {
       errorTrace = trace;
     } else if (typeof trace === "string") {

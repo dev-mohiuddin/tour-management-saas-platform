@@ -1,9 +1,11 @@
+// PLATFORM_ROLES with hierarchy
 export const PLATFORM_ROLES = [
   {
     name: "SuperAdmin",
     description:
       "Has unrestricted access to the entire platform. Can manage tenants, subscriptions, and core settings.",
     permissions: ["*"],
+    hierarchy: 1,
   },
   {
     name: "CoAdmin",
@@ -26,6 +28,7 @@ export const PLATFORM_ROLES = [
 
       "platform.analytics:view_all",
     ],
+    hierarchy: 2,
   },
 
   {
@@ -45,6 +48,7 @@ export const PLATFORM_ROLES = [
 
       "platform.analytics:view_financials",
     ],
+    hierarchy: 3,
   },
 
   {
@@ -57,6 +61,7 @@ export const PLATFORM_ROLES = [
       "platform.support:manage_tickets",
       "platform.knowledgebase:manage",
     ],
+    hierarchy: 4,
   },
 
   {
@@ -64,6 +69,7 @@ export const PLATFORM_ROLES = [
     description:
       "Owner of a tenant (agency). Grants access to the agency workspace.",
     permissions: ["tenant:access_workspace"],
+    hierarchy: 5,
   },
 
   {
@@ -71,12 +77,12 @@ export const PLATFORM_ROLES = [
     description:
       "A staff member of a tenant (agency). Grants access to the agency workspace.",
     permissions: ["tenant:access_workspace"],
+    hierarchy: 6,
   },
 ];
 
-
+// TENANT_DEFAULT_ROLES with hierarchy
 export const TENANT_DEFAULT_ROLES = [
-
   {
     name: "OrganizationAdmin",
     description:
@@ -98,7 +104,6 @@ export const TENANT_DEFAULT_ROLES = [
       "tenant.tour:delete",
       "tenant.tour:publish",
 
-
       "tenant.booking:create",
       "tenant.booking:read",
       "tenant.booking:update",
@@ -111,9 +116,10 @@ export const TENANT_DEFAULT_ROLES = [
       "tenant.expense:manage",
       "tenant.payout:read",
       "tenant.supplier:manage",
-      "tenant.resource:manage", 
+      "tenant.resource:manage",
       "tenant.settings:manage",
     ],
+    hierarchy: 7,
   },
 
   {
@@ -133,6 +139,7 @@ export const TENANT_DEFAULT_ROLES = [
       "tenant.booking:read",
       "tenant.customer:read",
     ],
+    hierarchy: 8,
   },
 
   {
@@ -152,6 +159,7 @@ export const TENANT_DEFAULT_ROLES = [
 
       "tenant.tour:read",
     ],
+    hierarchy: 9,
   },
 
   {
@@ -164,8 +172,9 @@ export const TENANT_DEFAULT_ROLES = [
       "tenant.invoice:manage",
       "tenant.payment:read",
       "tenant.expense:manage",
-      "tenant.payout:manage", 
+      "tenant.payout:manage",
     ],
+    hierarchy: 10,
   },
 
   {
@@ -177,11 +186,14 @@ export const TENANT_DEFAULT_ROLES = [
       "tenant.assigned_tour:read",
       "tenant.assigned_tour:view_participants",
       "tenant.assigned_tour:log_expense",
-      "tenant.assigned_tour:update_status", 
+      "tenant.assigned_tour:update_status",
+
       "tenant.communication:chat_with_manager",
       "tenant.communication:chat_with_participants",
     ],
+    hierarchy: 11,
   },
+
   {
     name: "Traveler",
     description: "The end-user who books tours through the marketplace.",
@@ -194,5 +206,6 @@ export const TENANT_DEFAULT_ROLES = [
       "marketplace.review:create",
       "marketplace.profile:manage",
     ],
+    hierarchy: 12,
   },
 ];

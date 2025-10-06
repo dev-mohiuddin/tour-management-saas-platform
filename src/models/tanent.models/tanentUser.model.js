@@ -51,8 +51,6 @@ const tenantUserSchema = new mongoose.Schema(
   }
 );
 
-tenantUserSchema.index({ platformUserId: 1, agencyId: 1 }, { unique: true });
-
 tenantUserSchema.virtual("fullName").get(function () {
   return `${this.firstName} ${this.lastName || ""}`.trim();
 });

@@ -8,7 +8,8 @@ import {
 import catchAsync from "#utils/catchAsync.js";
 
 export const createUser = catchAsync(async (req, res) => {
-  const user = await createPlatformUser(req.body);
+  const user = await createPlatformUser(req.body, req.user);
+
   res.success({
     data: user,
     message: "User created successfully",

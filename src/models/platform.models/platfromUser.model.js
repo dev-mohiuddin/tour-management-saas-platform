@@ -15,11 +15,12 @@ const platformUserSchema = new mongoose.Schema(
       validate: [validator.isEmail, "Please provide a valid email address."],
     },
     password: { type: String, required: true, minlength: 8, select: false },
-    role: {
-      type: String,
-      enum: ["SuperAdmin", "CoAdmin", "SupportAdmin", "FinanceAdmin"],
+    roleId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Role",
       required: true,
     },
+
     profilePhoto: {
       url: { type: String },
       publicId: { type: String },
@@ -44,8 +45,6 @@ const platformUserSchema = new mongoose.Schema(
     },
   }
 );
-
-platformUserSchema.index({ email: 1 }, { unique: true });
 
 platformUserSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
