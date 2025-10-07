@@ -1,8 +1,9 @@
 import express from "express";
-import platFromUserRouter from "./platform.route/platformUser.route.js";
+import platformUserRouter from "./platform.route/platformUser.route.js";
+import platformAuth from "./platform.route/platform.auth.route.js";
 
 const router = express.Router();
 
-router.use("/v1", [platFromUserRouter]);
+router.use("/v1", [platformUserRouter, platformAuth]);
 
 export default router;

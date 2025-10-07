@@ -77,6 +77,6 @@ roleSchema.pre("findOneAndDelete", async function (next) {
   }
 });
 
-const Role = mongoose.model("Role", roleSchema);
+const PlatformRole = mongoose.model("PlatformRole", roleSchema);
 
-export default Role;
+export default PlatformRole;

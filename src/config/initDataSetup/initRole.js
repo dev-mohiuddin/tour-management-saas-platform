@@ -1,20 +1,26 @@
-import Role from "#models/tanent.models/role.model.js";
-import { PLATFORM_ROLES, TENANT_DEFAULT_ROLES } from "#constants/roles.js";
+import PlatformRole from "#models/platform.models/platformRole.model.js";
+import { PLATFORM_ROLES } from "#constants/roles.js";
 
-export const initRoles = async () => {
+export const initPlatformRoles = async () => {
   try {
-    const allRoles = [...PLATFORM_ROLES, ...TENANT_DEFAULT_ROLES];
+    await Promise.all(
+      PLATFORM_ROLES.map(async (roleData) => {
+        const existingRole = await PlatformRole.findOne({
+          name: roleData.name,
+        });
+        if (!existingRole) {
+          await PlatformRole.create(roleData);
+          console.log(`Platform Role created: ${roleData.name}`);
+        }
+      })
+    );
 
-    for (const role of allRoles) {
-      const existing = await Role.findOne({ name: role.name });
-      if (!existing) {
-        await Role.create(role);
-        console.log(`Role created: ${role.name}`);
-      } else {
-        console.log(`Role already exists: ${role.name}`);
-      }
-    }
+    console.log("Platform roles initialization check complete.");
   } catch (err) {
-    console.error(" Error initializing roles:", err.message);
+    console.error(
+      "Critical Error initializing platform roles:",
+      err.message
+    );
+    process.exit(1);
   }
 };

@@ -14,7 +14,7 @@ const platformUserSchema = new mongoose.Schema(
       trim: true,
       validate: [validator.isEmail, "Please provide a valid email address."],
     },
-    password: { type: String, required: true, minlength: 8, select: false },
+    password: { type: String, required: true, minlength: 8 },
     roleId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Role",

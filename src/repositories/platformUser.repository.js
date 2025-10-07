@@ -1,15 +1,33 @@
-import PlatformUser from "#models/platform.models/platfromUser.model.js";
+import PlatformUser from "#models/platform.models/platformUser.model.js";
 
 export const findUserById = async (id) => {
-  return PlatformUser.findById(id).populate("roleId");
+  return PlatformUser.findById(id)
+    .populate({
+      path: "roleId",
+      select: "_id name permissions hierarchy",
+      strictPopulate: false,
+    })
+    .exec();
 };
 
 export const findUserByEmail = async (email) => {
-  return PlatformUser.findOne({ email }).populate("roleId");
+  return PlatformUser.findOne({ email })
+    .populate({
+      path: "roleId",
+      select: "_id name permissions hierarchy",
+      strictPopulate: false,
+    })
+    .exec();
 };
 
 export const getAllUsers = async () => {
-  return PlatformUser.find().populate("roleId");
+  return PlatformUser.find()
+    .populate({
+      path: "roleId",
+      select: "_id name permissions hierarchy",
+      strictPopulate: false,
+    })
+    .exec();
 };
 
 export const createUser = async (data) => {

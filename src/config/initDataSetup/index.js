@@ -1,8 +1,7 @@
-import { initRoles } from "./initRole.js";
+import { initPlatformRoles } from "./initRole.js";
 import { initSuperAdmin } from "./initSuperAdmin.js";
 
-
 export const initData = async () => {
-  await initRoles();
+  await initPlatformRoles();
   await initSuperAdmin();
-}
+};
